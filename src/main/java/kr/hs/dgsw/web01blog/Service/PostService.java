@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface PostService {
     List<PostUsernameProtocol> listAllPosts();
+    int countPost(Long userId);
     Post addPost(Post post);
     Post findPost(Long id);
     Post modifyPost(Post post);

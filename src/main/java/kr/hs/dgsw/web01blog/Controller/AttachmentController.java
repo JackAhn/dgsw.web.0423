@@ -47,7 +47,7 @@ public class AttachmentController {
                 return new ResponseFormat(ResponseType.ATTACHMENT_STORED, attachment);
             }
             else if(type.equals("user")){
-                User u = this.userRepository.findByUserid((String)id)
+                User u = this.userRepository.findByAccount((String)id)
                         .map(found->{
                             found.setProfilePath(destFilename);
                             return this.userRepository.save(found);
@@ -78,7 +78,7 @@ public class AttachmentController {
             filepath = a.getStoredPath();
         }
         else if(type.equals("user")){
-            u = this.userRepository.findByUserid((String)id).get();
+            u = this.userRepository.findByAccount((String)id).get();
             if(u.getProfilePath() == null)
                 return;
             filepath = u.getProfilePath();

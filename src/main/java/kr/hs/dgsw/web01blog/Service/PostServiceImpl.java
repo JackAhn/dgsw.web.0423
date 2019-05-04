@@ -35,6 +35,12 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public int countPost(Long userId) {
+        List<Post> post = this.postRepository.findByUserId(userId);
+        return post.size();
+    }
+
+    @Override
     public Post addPost(Post post) {
         Optional<User> user = this.userRepository.findById(post.getUserId());
         if(user.isPresent()){
@@ -49,14 +55,25 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Post findPost(Long id) {
-        return this.postRepository.findTopByUserIdOrderByIdDesc(id)
-                .orElse(null);
+        Optional<Post> post = this.postRepository.findById(id);
+        if(post.isPresent()){
+            Optional<User> user = this.userRepository.findById(post.get().getUserId());
+            if(user.isPresent()){
+                return new PostUsernameProtocol(post.get(), user.get().getUsername());
+            }
+            else{
+                return null;
+            }
+        }else{
+            return null;
+        }
     }
 
     @Override
     public Post modifyPost(Post post) {
         Post modify = this.postRepository.findById(post.getId())
                 .map(found -> {
+                    found.setTitle(Optional.ofNullable(post.getTitle()).orElse(found.getTitle()));
                     found.setContent(Optional.ofNullable(post.getContent()).orElse(found.getContent()));
                     //Attachment List 수정 코드 필요
                     return this.postRepository.save(found);

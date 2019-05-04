@@ -65,6 +65,10 @@ public class User {
     private LocalDateTime modified;
 
     public User(String account, String password, String username, String email, String phone){
-
+        this.account = account;
+        this.password = password;
+        this.username = username;
+        this.email = email;
+        this.phone = phone;
     }
 }

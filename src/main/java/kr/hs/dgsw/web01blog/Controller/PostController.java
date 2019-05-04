@@ -21,10 +21,21 @@ public class PostController {
     public ResponseFormat list(){
         List<PostUsernameProtocol> data = this.postService.listAllPosts();
         if(data.isEmpty()){
-            return new ResponseFormat(ResponseType.FAIL, data);
+            return new ResponseFormat(ResponseType.FAIL, null);
         }
         else{
-            return new ResponseFormat(ResponseType.POST_GET, null);
+            return new ResponseFormat(ResponseType.POST_GET, data);
+        }
+    }
+
+    @GetMapping("/postcount/{userId}")
+    public ResponseFormat postCount(@PathVariable Long userId){
+        int data = this.postService.countPost(userId);
+        if(data < 0){
+            return new ResponseFormat(ResponseType.FAIL, null);
+        }
+        else{
+            return new ResponseFormat(ResponseType.POST_GET, data);
         }
     }
 

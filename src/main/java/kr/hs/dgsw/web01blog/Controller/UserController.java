@@ -7,16 +7,13 @@ import kr.hs.dgsw.web01blog.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
+
 @RestController
 public class UserController {
 
     @Autowired
     private UserService userService;
-
-    @GetMapping
-    public ResponseFormat list(){
-        return new ResponseFormat(ResponseType.POST_ADD, "Hello");
-    }
 
     @GetMapping("/login/{id}/{pw}")
     public ResponseFormat login(@PathVariable String id, @PathVariable String pw){

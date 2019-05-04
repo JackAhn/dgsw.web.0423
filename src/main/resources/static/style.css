@@ -1,0 +1,64 @@
+div.content {
+    height: auto;
+}
+
+.container {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+body {
+    margin: 0;
+}
+
+header {
+    line-height: 100px;
+    text-align: center;
+    height: 120px;
+}
+
+aside {
+    top: 120px;
+    bottom: 100px;
+}
+
+aside.left-container {
+    top : 120px !important;
+    bottom: 100px !important;
+    text-align: center;
+    width: 200px;
+}
+
+aside.right-container {
+    left: calc(100vw - 200px);
+    top : 120px !important;
+    bottom: 100px !important;
+    text-align: center;
+}
+
+#main-container, #write-container {
+    left: 200px;
+    right: 200px;
+    top: 120px;
+    bottom: 100px;
+    overflow-y: auto;
+    text-align: center;
+    align-items: center;
+}
+
+#title-container{
+    text-align: center;
+}
+
+.content-btn{
+    text-align: center;
+}
+
+footer {
+    top: calc(100vh - 100px) !important;
+    line-height: 100px;
+    text-align: center;
+}

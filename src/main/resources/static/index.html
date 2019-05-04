@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body onload="setLogin();fetchPost();">
+<header class="container">
+    <h1>DGSW SNS</h1>
+</header>
+<aside class="container left-container">
+    <button onclick="newPost();">새 글 쓰기</button>
+    <br>
+    <h2>글 리스트</h2>
+    <div id="title-container"></div>
+</aside>
+<section id="main-container" class="container">
+    <div class="content-title">
+        <div id="post-title" style="font-size: 20px; text-align: left;">aaaaa</div>
+        <hr>
+        <div id="post-username" style="float: left"></div>
+        <div id="post-created" style="float: right;"></div>
+    </div>
+    <br>
+    <div id="post-content" class="content"></div>
+    <div class="content-btn" style="position: absolute; bottom: 90px; left: 100px; right: 100px;">
+        <button>이전 글</button>
+        <button onclick="setmodifyPost()">수정</button>
+        <button onclick="deletePost()">삭제</button>
+        <button>다음 글</button>
+    </div>
+</section>
+<section id="write-container" class="container" style="display: none;">
+    <h2 id="headnewtitle">새 글 쓰기</h2>
+    <input id="newtitle" type="text" placeholder="제목"><br><br>
+    <textarea id="newtext" placeholder="내용" style="height: 200px; width: 300px;"></textarea><br>
+    <button id="postbtn" onclick="createPost()">등록</button>
+    <button onclick="showPost()">취소</button>
+</section>
+<aside class="container right-container">
+    <div id="user-interface">
+        <img src="" style="width: 150px; height: 150px;">
+        <div id="user-id"></div>
+        <div id="user-name"></div>
+        <div id="user-created"></div>
+        <div id="user-count"></div>
+    </div>
+</aside>
+<footer class="container">
+    Powered by DGSW
+</footer>
+</body>
+<link href="style.css" rel="stylesheet"/>
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script src="app.js"></script>
+</html>

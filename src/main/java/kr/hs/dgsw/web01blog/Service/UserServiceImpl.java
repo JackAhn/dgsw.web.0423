@@ -5,6 +5,7 @@ import kr.hs.dgsw.web01blog.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.Optional;
 
 @Service
@@ -13,9 +14,14 @@ public class UserServiceImpl implements  UserService{
     @Autowired
     private UserRepository userRepository;
 
+    @PostConstruct
+    private void init(){
+        User u = this.userRepository.save(new User("user1", "1234", "test", "abc@dgsw", "010-1234-1234"));
+    }
+
     @Override
     public User chkLogin(String id, String pw) {
-        Optional<User> data = userRepository.findByUserid(id);
+        Optional<User> data = userRepository.findByAccount(id);
         if(data.isPresent()){
             String datapw = data.get().getPassword();
             if(datapw.equals(pw)){
@@ -32,7 +38,7 @@ public class UserServiceImpl implements  UserService{
 
     @Override
     public int addUser(User user) {
-        Optional<User> found = this.userRepository.findByUserid(user.getAccount());
+        Optional<User> found = this.userRepository.findByAccount(user.getAccount());
         Optional<User> found2 = this.userRepository.findByEmail(user.getEmail());
         User u = null;
         if(found.isPresent()){
@@ -65,7 +71,7 @@ public class UserServiceImpl implements  UserService{
     @Override
     public boolean removeUser(String id) {
         try {
-            User u = this.userRepository.findByUserid(id).get();
+            User u = this.userRepository.findByAccount(id).get();
             this.userRepository.delete(u);
             return true;
         } catch (Exception e) {
